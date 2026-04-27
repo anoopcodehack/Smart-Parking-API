@@ -1,0 +1,258 @@
+{
+  "info": {
+    "name": "Smart Parking Lot API",
+    "description": "Complete API collection for the Smart Parking Lot backend system. Test flow: Initialize → Entry → Status checks → Exit → History.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000/api",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "🔲 Slot Management",
+      "item": [
+        {
+          "name": "Initialize Parking Lot",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/slots/initialize", "host": ["{{baseUrl}}"], "path": ["slots", "initialize"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"totalSlots\": 10\n}"
+            }
+          }
+        },
+        {
+          "name": "Get All Slots",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/slots", "host": ["{{baseUrl}}"], "path": ["slots"] }
+          }
+        },
+        {
+          "name": "Get Available Slots",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/slots?status=available",
+              "host": ["{{baseUrl}}"],
+              "path": ["slots"],
+              "query": [{ "key": "status", "value": "available" }]
+            }
+          }
+        },
+        {
+          "name": "Get Occupied Slots",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/slots?status=occupied",
+              "host": ["{{baseUrl}}"],
+              "path": ["slots"],
+              "query": [{ "key": "status", "value": "occupied" }]
+            }
+          }
+        },
+        {
+          "name": "Get Slot by Number",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/slots/1", "host": ["{{baseUrl}}"], "path": ["slots", "1"] }
+          }
+        },
+        {
+          "name": "Reset Parking Lot",
+          "request": {
+            "method": "DELETE",
+            "url": { "raw": "{{baseUrl}}/slots/reset", "host": ["{{baseUrl}}"], "path": ["slots", "reset"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "🚗 Vehicle Management",
+      "item": [
+        {
+          "name": "Vehicle Entry - Car 1",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/vehicles/entry", "host": ["{{baseUrl}}"], "path": ["vehicles", "entry"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"numberPlate\": \"MH12AB1234\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Vehicle Entry - Car 2",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/vehicles/entry", "host": ["{{baseUrl}}"], "path": ["vehicles", "entry"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"numberPlate\": \"KA05CD5678\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Vehicle Entry - Car 3",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/vehicles/entry", "host": ["{{baseUrl}}"], "path": ["vehicles", "entry"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"numberPlate\": \"DL01EF9999\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Vehicle Entry - Duplicate (409 test)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/vehicles/entry", "host": ["{{baseUrl}}"], "path": ["vehicles", "entry"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"numberPlate\": \"MH12AB1234\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Vehicle Exit - Car 1",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/vehicles/exit", "host": ["{{baseUrl}}"], "path": ["vehicles", "exit"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"numberPlate\": \"MH12AB1234\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Get All Currently Parked",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/vehicles", "host": ["{{baseUrl}}"], "path": ["vehicles"] }
+          }
+        },
+        {
+          "name": "Search Vehicle by Plate",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/vehicles/MH12AB1234", "host": ["{{baseUrl}}"], "path": ["vehicles", "MH12AB1234"] }
+          }
+        },
+        {
+          "name": "Exit Non-Existent Vehicle (404 test)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/vehicles/exit", "host": ["{{baseUrl}}"], "path": ["vehicles", "exit"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"numberPlate\": \"XX99ZZ0000\"\n}"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "📋 Parking History",
+      "item": [
+        {
+          "name": "Get All History",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/history", "host": ["{{baseUrl}}"], "path": ["history"] }
+          }
+        },
+        {
+          "name": "Get History - EXITED only",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/history?status=EXITED",
+              "host": ["{{baseUrl}}"],
+              "path": ["history"],
+              "query": [{ "key": "status", "value": "EXITED" }]
+            }
+          }
+        },
+        {
+          "name": "Get History - PARKED only",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/history?status=PARKED",
+              "host": ["{{baseUrl}}"],
+              "path": ["history"],
+              "query": [{ "key": "status", "value": "PARKED" }]
+            }
+          }
+        },
+        {
+          "name": "Get History - Filter by Plate",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/history?plate=MH12AB1234",
+              "host": ["{{baseUrl}}"],
+              "path": ["history"],
+              "query": [{ "key": "plate", "value": "MH12AB1234" }]
+            }
+          }
+        },
+        {
+          "name": "Get History - Paginated",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/history?page=1&limit=5",
+              "host": ["{{baseUrl}}"],
+              "path": ["history"],
+              "query": [
+                { "key": "page", "value": "1" },
+                { "key": "limit", "value": "5" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Clear All History",
+          "request": {
+            "method": "DELETE",
+            "url": { "raw": "{{baseUrl}}/history/clear", "host": ["{{baseUrl}}"], "path": ["history", "clear"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "❤️ Health Check",
+      "item": [
+        {
+          "name": "Root - API Info",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "http://localhost:3000", "host": ["http://localhost:3000"] }
+          }
+        },
+        {
+          "name": "Health Check",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "http://localhost:3000/health", "host": ["http://localhost:3000"], "path": ["health"] }
+          }
+        }
+      ]
+    }
+  ]
+}

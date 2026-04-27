@@ -11,6 +11,7 @@ Database: MongoDB
 ODM: Mongoose
 Environment Config: dotenv
 Development: nodemon
+
 📁 Project Structure
 smart-parking/
 ├── src/
@@ -34,6 +35,7 @@ npm install
 cp .env.example .env
 Configure .env
 PORT=3000
+
 MONGODB_URI=mongodb://localhost:27017/smart_parking
 NODE_ENV=development
 Run
@@ -95,12 +97,8 @@ No authentication system
 No payment/billing logic
 No real-time updates
 No frontend
-🔮 Future Improvements
-JWT Authentication
-Billing system
-WebSocket live updates
-ANPR integration
-React dashboard
+
+
 📄 License
 
 MIT License

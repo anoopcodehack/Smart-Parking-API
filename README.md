@@ -26,6 +26,7 @@ smart-parking/
 ├── .env.example
 ├── package.json
 └── README.md
+
 ⚙️ Setup
 git clone https://github.com/your-username/smart-parking-api.git
 cd smart-parking-api
@@ -38,11 +39,13 @@ NODE_ENV=development
 Run
 npm run dev   # development
 npm start     # production
+
 📡 API Overview
 
 Base URL:
 
 http://localhost:3000/api
+
 🔲 Slots
 Initialize parking lot
 View all / filter slots

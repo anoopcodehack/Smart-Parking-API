@@ -1,0 +1,63 @@
+Initialize Parking Lot
+1. POST http://localhost:3000/api/slots/initialize
+Body → raw → JSON:
+json{
+  "totalSlots": 10
+}
+
+2️ .Get All Slots
+GET http://localhost:3000/api/slots
+
+3. Get Available Slots
+GET http://localhost:3000/api/slots?status=available
+
+4️. Vehicle Entry — Car 1
+POST http://localhost:3000/api/vehicles/entry
+json{
+  "numberPlate": "MH12AB1234"
+}
+
+5️. Vehicle Entry — Car 2
+POST http://localhost:3000/api/vehicles/entry
+json{
+  "numberPlate": "KA05CD5678"
+}
+
+6️. Vehicle Entry — Car 3
+POST http://localhost:3000/api/vehicles/entry
+json{
+  "numberPlate": "DL01EF9999"
+}
+
+7️. Try Duplicate Entry (should give 409 error — shows validation works)
+POST http://localhost:3000/api/vehicles/entry
+json{
+  "numberPlate": "MH12AB1234"
+}
+
+8️.Get Occupied Slots
+GET http://localhost:3000/api/slots?status=occupied
+
+9️. Get All Currently Parked Vehicles
+GET http://localhost:3000/api/vehicles
+
+10.Search Vehicle by Number Plate
+GET http://localhost:3000/api/vehicles/MH12AB1234
+
+11 .Get Specific Slot
+GET http://localhost:3000/api/slots/1
+
+12.  Vehicle Exit
+POST http://localhost:3000/api/vehicles/exit
+json{
+  "numberPlate": "MH12AB1234"
+}
+
+1️3.  Get Parking History
+GET http://localhost:3000/api/history
+
+14. Get History - EXITED only
+GET http://localhost:3000/api/history?status=EXITED
+
+1️5. Reset Parking Lot
+DELETE http://localhost:3000/api/slots/reset

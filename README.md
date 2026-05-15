@@ -1,23 +1,15 @@
 🅿️ Smart Parking Lot API
-
-A scalable RESTful backend system for managing parking lots with automated slot allocation, real-time availability tracking, vehicle lifecycle management, and complete parking history.
-
-Built with a clean architecture and production-ready practices.
+A scalable RESTful backend system for managing parking lots with automated slot allocation, real-time availability tracking, vehicle lifecycle management, and complete parking history. Built with clean architecture and production-ready practices.
 
 🚀 Tech Stack
-Runtime: Node.js
-Framework: Express.js
-Database: MongoDB
-ODM: Mongoose
-Environment Config: dotenv
-Development: nodemon
+LayerTechnologyRuntimeNode.jsFrameworkExpress.jsDatabaseMongoDBODMMongooseEnvironment ConfigdotenvDevelopmentnodemon
 
-📁 Project Structure
 smart-parking/
 ├── src/
 │   ├── server.js
 │   ├── app.js
-│   ├── config/db.js
+│   ├── config/
+│   │   └── db.js
 │   ├── models/
 │   ├── controllers/
 │   ├── routes/
@@ -29,56 +21,51 @@ smart-parking/
 └── README.md
 
 ⚙️ Setup
-git clone https://github.com/your-username/smart-parking-api.git
+1. Clone the repository
+bashgit clone https://github.com/your-username/smart-parking-api.git
 cd smart-parking-api
-npm install
-cp .env.example .env
-Configure .env
-PORT=3000
-
+2. Install dependencies
+bashnpm install
+3. Configure environment
+bashcp .env.example .env
+Edit .env with your values:
+envPORT=3000
 MONGODB_URI=mongodb://localhost:27017/smart_parking
 NODE_ENV=development
-Run
-npm run dev   # development
-npm start     # production
+4. Run the server
+bashnpm run dev     # Development (with nodemon)
+npm start       # Production
 
 📡 API Overview
-
-Base URL:
-
-http://localhost:3000/api
-
+Base URL: http://localhost:3000/api
 🔲 Slots
-Initialize parking lot
-View all / filter slots
-Reset system
+MethodEndpointDescriptionPOST/slots/initializeInitialize the parking lotGET/slotsView all slots (with filters)DELETE/slots/resetReset the entire system
 🚗 Vehicles
-Entry → auto slot assignment
-Exit → duration calculation
-View parked vehicles
-Search by number plate
+MethodEndpointDescriptionPOST/vehicles/entryVehicle entry — auto slot assignmentPOST/vehicles/exitVehicle exit — duration calculationGET/vehiclesView all currently parked vehiclesGET/vehicles/search?plate=Search by number plate
 📋 History
-Full history tracking
-Filter by status or plate
-Pagination support
+MethodEndpointDescriptionGET/historyFull parking historyGET/history?status=Filter by statusGET/history?plate=Filter by number plateGET/history?page=&limit=Paginated results
+
 ✨ Key Features
-Smart nearest-slot allocation
-Duplicate vehicle entry prevention
-Accurate parking duration tracking
-Advanced filtering & search
-Pagination for large datasets
-Consistent API response structure
-Indexed queries for performance
+
+Smart Slot Allocation — Automatically assigns the nearest available slot
+Duplicate Prevention — Blocks re-entry of an already-parked vehicle
+Duration Tracking — Accurate parking time calculation on exit
+Advanced Filtering — Search and filter across slots, vehicles, and history
+Pagination — Efficient handling of large datasets
+Consistent Responses — Uniform API response structure throughout
+Indexed Queries — MongoDB indexes for high-performance lookups
+
+
 📊 Data Models
 ParkingSlot
-{
+js{
   slotNumber: Number,
   isOccupied: Boolean,
   vehicleNumberPlate: String,
   entryTime: Date
 }
 ParkingHistory
-{
+js{
   vehicleNumberPlate: String,
   slotNumber: Number,
   entryTime: Date,
@@ -86,20 +73,23 @@ ParkingHistory
   durationMinutes: Number,
   status: "PARKED" | "EXITED"
 }
+
 🧪 Testing Flow
-Initialize slots
-Park vehicles
-Check occupied slots
-Exit vehicle
-Verify history
+
+Initialize the parking lot with slots
+Park one or more vehicles
+Check currently occupied slots
+Exit a vehicle
+Verify the parking history
+
+
 ⚠️ Limitations
-No authentication system
-No payment/billing logic
-No real-time updates
-No frontend
+
+No authentication or authorization system
+No payment or billing logic
+No real-time updates (WebSocket/SSE)
+No frontend interface
 
 
 📄 License
-
-MIT License
-
+MIT License — free to use, modify, and distribute.
